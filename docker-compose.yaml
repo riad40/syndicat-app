@@ -9,22 +9,25 @@ services:
       - syndicat-app-net
     depends_on:
       - mongodb
+    volumes:
+      - ./api:/api
 
-  frontend:
-    build: ./frontend
-    container_name: frontend_container
-    ports:
-      - 3000:3000
-    networks:
-      - syndicat-app-net
-    depends_on:
-      - api
+  # frontend:
+  #   build: ./frontend
+  #   container_name: frontend_container
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - syndicat-app-net
+  #   depends_on:
+  #     - api
 
   mongodb:
     image: mongo
     container_name: mongodb_container
     ports:
       - 27018:27017
+      
     networks:
       - syndicat-app-net
     volumes:
