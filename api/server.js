@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('./config/init_db').setDefaultUser()
+require('./config/init_db').initDb()
 require('./config/config')
 const errorHandler = require('./middlewares/error-handler')
 const express = require('express')
