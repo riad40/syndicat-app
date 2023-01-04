@@ -1,11 +1,15 @@
 import './home.css'
 import { useState } from 'react'
 import { api } from '../helpers/api'
+import { Navigate } from 'react-router-dom'
+
 function Home() {
 
     const [user, setUser] = useState({})
     
     const [err, setErr] = useState('')
+
+    const [noErr, setNoErr] = useState(false)
     
     const inputHandler = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -18,10 +22,12 @@ function Home() {
         api.post('/auth/login', user, { withCredentials: true })
             .then((response) => {
                 localStorage.setItem('token', response.data.token)
+                setNoErr(true)
                 console.log(response)
             })
             .catch((err) => {
                 setErr(err.response?.data?.message)
+                setNoErr(false)
                 console.log(err)
             })
     }
@@ -46,6 +52,7 @@ function Home() {
                         </div>
                     </form>
                 </div>
+                { noErr && <Navigate to='/dashboard' /> }
             </section>
         </>
     )
