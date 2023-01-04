@@ -15,6 +15,13 @@ const validate = (method) => {
                 body('floorNumber').exists().isInt()
             ]
         }
+        case 'paymentform' : {
+            return [
+                body('paymentAmount').exists().isInt(),
+                body('monthsPayed').exists().isDate(),
+                body('paymentId').exists().isString(),
+            ]
+        }
     }
 }
 

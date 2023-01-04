@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createApparetment, updateApparetment, getApparetments, getApparetment, deleteAppartement } = require('../controllers/appartementCobtroller')
+const { createApparetment, updateApparetment, getApparetments, getApparetment, deleteAppartement } = require('../controllers/appartementController')
 const { validate } = require('../middlewares/inputValidator')
 const { getOneAppartement } = require('../middlewares/appartement')
 
