@@ -8,6 +8,13 @@ const validate = (method) => {
                 body('password').isLength({min: 4}),
             ]   
         }
+        case 'appaform' : {
+            return [
+                body('appartementOwner').exists(),
+                body('appartementNumber').exists().isInt(),
+                body('floorNumber').exists().isInt()
+            ]
+        }
     }
 }
 
