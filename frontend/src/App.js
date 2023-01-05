@@ -1,11 +1,17 @@
-import Home from "./pages/Home"
-import Dashboard from "./pages/Dashboard"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 import IsLoggedIn from "./components/isLoggedin"
 import Wrapper from "./components/common/Wrapper"
-import Appartment from "./pages/apartments/Appartment"
-import Payment from "./pages/payments/Payment"
+import {
+    Appartment,
+    CreateAppartment,
+    UpdateAppartment,
+    Payment,
+    CreatePayment,
+    UpdatePayment,
+    Dashboard,
+    Home,
+} from "./pages/index"
 
 function App() {
     return (
@@ -20,7 +26,23 @@ function App() {
                                 path="/appartments"
                                 element={<Appartment />}
                             />
+                            <Route
+                                path="/appartments/create"
+                                element={<CreateAppartment />}
+                            />
+                            <Route
+                                path="/appartments/edit"
+                                element={<UpdateAppartment />}
+                            />
                             <Route path="/payments" element={<Payment />} />
+                            <Route
+                                path="/payments/create"
+                                element={<CreatePayment />}
+                            />
+                            <Route
+                                path="/payments/edit"
+                                element={<UpdatePayment />}
+                            />
                         </Route>
                     </Route>
                 </Routes>
