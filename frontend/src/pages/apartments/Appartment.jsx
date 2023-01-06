@@ -1,6 +1,28 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { api } from "../../helpers/api"
 
 function Appartment() {
+    const [data, setData] = useState({})
+    const [err, setErr] = useState()
+
+    const token = localStorage.getItem("token")
+
+    useEffect(() => {
+        api.get("/appartements", {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((response) => {
+                setData(response.data.data)
+            })
+            .catch((err) => {
+                setErr(err.response?.data)
+                console.log(err)
+            })
+    }, [])
+
+    console.log(data)
+
     return (
         <>
             <div className="mt-4 mx-4">
