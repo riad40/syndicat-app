@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const appartementSchema = new mongoose.Schema({
-
     appartementNumber: {
         type: Number,
         required: true,
@@ -14,9 +13,8 @@ const appartementSchema = new mongoose.Schema({
     },
     floorNumber: {
         type: mongoose.Types.ObjectId,
-        ref: 'floors'
+        ref: "floors",
     },
-
 })
 
-module.exports = mongoose.model('Apparetement', appartementSchema)
+module.exports = mongoose.model("Apparetement", appartementSchema)
