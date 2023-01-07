@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { api } from "../../helpers/api"
 
 function Appartment() {
-    const [data, setData] = useState({})
+    const [data, setData] = useState([])
     const [err, setErr] = useState()
 
     const token = localStorage.getItem("token")
@@ -14,6 +14,7 @@ function Appartment() {
         })
             .then((response) => {
                 setData(response.data.data)
+                console.log(response)
             })
             .catch((err) => {
                 setErr(err.response?.data)
@@ -44,7 +45,7 @@ function Appartment() {
                                 <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-700 text-gray-400 bg-gray-800">
                                     <th className="px-4 py-3">Owner</th>
                                     <th className="px-4 py-3 text-center">
-                                        Appartment Number Paid
+                                        Appartment Number
                                     </th>
                                     <th className="px-4 py-3 text-center">
                                         Floor Number
@@ -58,37 +59,41 @@ function Appartment() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-700 bg-gray-800">
-                                <tr className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400">
-                                    <td className="px-4 py-3">
-                                        <div className="flex items-center text-sm">
-                                            <div>
-                                                <p className="font-semibold">
-                                                    Hans Burger
-                                                </p>
+                                {data.map((appartment) => (
+                                    <tr className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400">
+                                        <td className="px-4 py-3">
+                                            <div className="flex items-center text-sm">
+                                                <div>
+                                                    <p className="font-semibold">
+                                                        {
+                                                            appartment.appartementOwner
+                                                        }
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-center">
-                                        $855.85
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-center">
-                                        15-01-2021
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-center">
-                                        15-01-2021
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-center">
-                                        <Link
-                                            className=" text-white bg-blue-700 font-medium rounded text-sm px-3 py-2"
-                                            to="/appartments/edit"
-                                        >
-                                            Update
-                                        </Link>
-                                        <span className="mx-2 text-white bg-red-700 font-medium rounded text-sm px-3 py-2 text-center">
-                                            Delete
-                                        </span>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-center">
+                                            {appartment.appartementNumber}
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-center">
+                                            {appartment.floorNumber.floorNumber}
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-center">
+                                            15-01-2021
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-center">
+                                            <Link
+                                                className=" text-white bg-blue-700 font-medium rounded text-sm px-3 py-2"
+                                                to="/appartments/edit"
+                                            >
+                                                Update
+                                            </Link>
+                                            <span className="mx-2 text-white bg-red-700 font-medium rounded text-sm px-3 py-2 text-center">
+                                                Delete
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

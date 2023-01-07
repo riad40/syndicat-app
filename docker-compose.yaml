@@ -1,45 +1,44 @@
-version: '2.12.2'
+version: "2.12.2"
 services:
-  api:
-    build: ./api
-    container_name: api_container
-    ports:
-      - 3002:3002 
-    networks:
-      - syndicat-app-net
-    depends_on:
-      - mongodb
-    volumes:
-      - ./api:/api
+    api:
+        build: ./api
+        container_name: api_container
+        ports:
+            - 3002:3002
+        networks:
+            - syndicat-app-net
+        depends_on:
+            - mongodb
+        volumes:
+            - ./api:/api
 
-  frontend:
-    build: ./frontend
-    container_name: frontend_container
-    ports:
-      - 3000:3000
-    networks:
-      - syndicat-app-net
-    depends_on:
-      - api
-    volumes:
-      - ./frontend:/frontend
+    # frontend:
+    #   build: ./frontend
+    #   container_name: frontend_container
+    #   ports:
+    #     - 3000:3000
+    #   networks:
+    #     - syndicat-app-net
+    #   depends_on:
+    #     - api
+    #   volumes:
+    #     - ./frontend:/frontend
 
-  mongodb:
-    image: mongo
-    container_name: mongodb_container
-    ports:
-      - 27018:27017
-      
-    networks:
-      - syndicat-app-net
-    volumes:
-      - mongodb-data:/data/db
-      
+    mongodb:
+        image: mongo
+        container_name: mongodb_container
+        ports:
+            - 27018:27017
+
+        networks:
+            - syndicat-app-net
+        volumes:
+            - mongodb-data:/data/db
+
 networks:
-  syndicat-app-net:
-    driver: bridge
+    syndicat-app-net:
+        driver: bridge
 
 volumes:
-  mongodb-data:
-    driver: local
-    
+    mongodb-data:
+        driver: local
