@@ -13,7 +13,7 @@ const appartementSchema = new mongoose.Schema({
     },
     floorNumber: {
         type: mongoose.Types.ObjectId,
-        ref: "floors",
+        ref: "Floor",
     },
 })
 

@@ -15,8 +15,6 @@ const createApparetment = async (req, res, next) => {
         // get the floor number
         const floorId = await Floor.findOne({ floorNumber })
 
-        console.log(floorId)
-
         // create new record
         const appartement = new Apparetement({
             appartementNumber: appartementNumber,
@@ -73,13 +71,15 @@ const getApparetment = async (req, res) => {
     res.json(200, { data: req.appartement })
 }
 
-const getApparetments = async (req, res, next) => {
+const getApparetments = (req, res, next) => {
     Apparetement.find()
+        .populate("floorNumber")
         .then((data) => {
             res.json(200, { data })
         })
         .catch((err) => {
             next({ status: 400, error: true, message: err })
+            console.log(err)
         })
 }
 
