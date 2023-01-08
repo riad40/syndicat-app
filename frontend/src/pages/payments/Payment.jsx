@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { api } from "../../helpers/api"
 
 function Payment() {
+    const [data, setData] = useState([])
+
+    const token = localStorage.getItem("token")
+
+    console.log(data)
+
+    useEffect(() => {
+        api.get("/payments", {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((response) => {
+                setData(response.data.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
     return (
         <>
             <div className="mt-4 mx-4">
@@ -22,42 +42,45 @@ function Payment() {
                                 <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-700 text-gray-400 bg-gray-800">
                                     <th className="px-4 py-3">Owner</th>
                                     <th className="px-4 py-3">Amount Paid</th>
-                                    <th className="px-4 py-3">
-                                        Last Paid Months
-                                    </th>
-                                    <th className="px-4 py-3">Unpaid Months</th>
+                                    <th className="px-4 py-3">Payment id</th>
+                                    <th className="px-4 py-3">Paid Months</th>
                                     <th className="px-4 py-3">Action</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-700 bg-gray-800">
-                                <tr className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400">
-                                    <td className="px-4 py-3">
-                                        <div className="flex items-center text-sm">
-                                            <div>
-                                                <p className="font-semibold">
-                                                    Hans Burger
-                                                </p>
+                                {data.map((payment) => (
+                                    <tr className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400">
+                                        <td className="px-4 py-3">
+                                            <div className="flex items-center text-sm">
+                                                <div>
+                                                    <p className="font-semibold">
+                                                        {
+                                                            payment.appartement
+                                                                .appartementOwner
+                                                        }
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        $855.85
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        15-01-2021
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        15-01-2021
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        <Link
-                                            to="/payments/edit"
-                                            className="text-white bg-blue-700 font-medium rounded text-sm px-3 py-2 text-center"
-                                        >
-                                            Update
-                                        </Link>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td className="px-4 py-3 text-sm">
+                                            ${payment.paymentAmount}
+                                        </td>
+                                        <td className="px-4 py-3 text-sm">
+                                            {payment.paymentId}
+                                        </td>
+                                        <td className="px-4 py-3 text-sm">
+                                            {payment.monthsPayed[0]}
+                                        </td>
+                                        <td className="px-4 py-3 text-sm">
+                                            <Link
+                                                to="/payments/edit"
+                                                className="text-white bg-blue-700 font-medium rounded text-sm px-3 py-2 text-center"
+                                            >
+                                                Update
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
