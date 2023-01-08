@@ -15,7 +15,7 @@ const { authChecker } = require("../middlewares/auth")
 router.get("/floors", authChecker, getFloors)
 router.post("/", authChecker, validate("appaform"), createApparetment)
 router.get("/:appa_id", authChecker, getApparetment)
-router.put("/", authChecker, validate("appaform"), updateApparetment)
+router.put("/:appa_id", authChecker, validate("appaform"), updateApparetment)
 router.get("/", authChecker, getApparetments)
 router.delete("/:appa_id", authChecker, deleteAppartement)
 
