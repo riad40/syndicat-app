@@ -46,7 +46,7 @@ const updateApparetment = async (req, res, next) => {
         const floorId = Floor.findOne({ floorNumber: floorNumber })
 
         // update existing record
-        const appartement = Apparetement.updateMany(
+        const appartement = await Apparetement.updateOne(
             { _id: req.appartement._id },
             {
                 $set: {
@@ -56,19 +56,18 @@ const updateApparetment = async (req, res, next) => {
                 },
             }
         )
-        await appartement.save()
 
         res.json(200, {
             message: "Apparetement Updated Succefully",
-            appartement,
         })
     } catch (error) {
         next({ status: 400, error: true, message: error })
+        console.log(error)
     }
 }
 
 const getApparetment = async (req, res) => {
-    res.json(200, { data: req.appartement })
+    res.json(200, { data: await req.appartement })
 }
 
 const getApparetments = (req, res, next) => {
