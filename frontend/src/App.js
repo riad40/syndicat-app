@@ -31,7 +31,7 @@ function App() {
                                 element={<CreateAppartment />}
                             />
                             <Route
-                                path="/appartments/edit"
+                                path="/appartments/edit/:appartment_id"
                                 element={<UpdateAppartment />}
                             />
                             <Route path="/payments" element={<Payment />} />

@@ -83,7 +83,7 @@ const getApparetments = (req, res, next) => {
 }
 
 const deleteAppartement = async (req, res, next) => {
-    Apparetement.destroy({ where: { _id: req.appartement._id } })
+    Apparetement.deleteOne({ _id: req.appartement._id })
         .then(() => {
             res.json(200, { message: "Apparetement Removed Succefully" })
         })

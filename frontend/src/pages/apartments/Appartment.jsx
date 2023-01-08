@@ -4,7 +4,6 @@ import { api } from "../../helpers/api"
 
 function Appartment() {
     const [data, setData] = useState([])
-    const [err, setErr] = useState()
 
     const token = localStorage.getItem("token")
 
@@ -14,15 +13,24 @@ function Appartment() {
         })
             .then((response) => {
                 setData(response.data.data)
-                console.log(response)
             })
             .catch((err) => {
-                setErr(err.response?.data)
                 console.log(err)
             })
     }, [])
 
-    console.log(data)
+    const removeAppartment = (id) => {
+        api.delete(`/appartements/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((response) => {
+                let result = data.filter((appa) => appa._id !== id)
+                setData(result)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return (
         <>
@@ -60,7 +68,10 @@ function Appartment() {
                             </thead>
                             <tbody className="divide-y divide-gray-700 bg-gray-800">
                                 {data.map((appartment) => (
-                                    <tr className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400">
+                                    <tr
+                                        key={appartment._id}
+                                        className="bg-gray-800 hover:bg-gray-100 hover:bg-gray-900 text-gray-400"
+                                    >
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm">
                                                 <div>
@@ -83,12 +94,19 @@ function Appartment() {
                                         </td>
                                         <td className="px-4 py-3 text-sm text-center">
                                             <Link
-                                                className=" text-white bg-blue-700 font-medium rounded text-sm px-3 py-2"
-                                                to="/appartments/edit"
+                                                className="text-white bg-blue-700 font-medium rounded text-sm px-3 py-2"
+                                                to={`/appartments/edit/${appartment._id}`}
                                             >
                                                 Update
                                             </Link>
-                                            <span className="mx-2 text-white bg-red-700 font-medium rounded text-sm px-3 py-2 text-center">
+                                            <span
+                                                onClick={() =>
+                                                    removeAppartment(
+                                                        appartment._id
+                                                    )
+                                                }
+                                                className="cursor-pointer mx-2 text-white bg-red-700 font-medium rounded text-sm px-3 py-2 text-center"
+                                            >
                                                 Delete
                                             </span>
                                         </td>
