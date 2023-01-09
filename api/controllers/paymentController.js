@@ -41,10 +41,12 @@ const updatePayment = async (req, res, next) => {
             return next({ status: 400, error: true, message: errors.array() })
 
         // get the floor number
-        const appartementId = await Apparetement.findOne({ appartement })
+        const appartementId = await Apparetement.findOne({
+            appartement: appartement,
+        })
 
         // create new record
-        const payment = await updateOne(
+        const payment = await Payment.updateOne(
             { _id: req.payment._id },
             {
                 $set: {
@@ -58,12 +60,13 @@ const updatePayment = async (req, res, next) => {
 
         res.json(200, { message: "Payment Updated Succefully" })
     } catch (error) {
+        console.log(error)
         next({ status: 400, error: true, message: error })
     }
 }
 
 const getPayment = async (req, res) => {
-    await res.json(200, { data: req.payment })
+    res.json(200, { data: await req.payment })
 }
 
 const getPayments = async (req, res, next) => {

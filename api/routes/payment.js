@@ -12,7 +12,7 @@ const { authChecker } = require("../middlewares/auth")
 
 router.post("/", authChecker, validate("paymentform"), createPayment)
 router.get("/:payment_id", authChecker, getPayment)
-router.put("/", authChecker, validate("paymentform"), updatePayment)
+router.put("/:payment_id", authChecker, validate("paymentform"), updatePayment)
 router.get("/", authChecker, getPayments)
 
 router.param("payment_id", getOnePayment)
