@@ -40,7 +40,7 @@ function App() {
                                 element={<CreatePayment />}
                             />
                             <Route
-                                path="/payments/edit"
+                                path="/payments/edit/:payment_id"
                                 element={<UpdatePayment />}
                             />
                         </Route>

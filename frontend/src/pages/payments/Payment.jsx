@@ -73,7 +73,7 @@ function Payment() {
                                         </td>
                                         <td className="px-4 py-3 text-sm">
                                             <Link
-                                                to="/payments/edit"
+                                                to={`/payments/edit/${payment._id}`}
                                                 className="text-white bg-blue-700 font-medium rounded text-sm px-3 py-2 text-center"
                                             >
                                                 Update
