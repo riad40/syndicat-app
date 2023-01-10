@@ -20,6 +20,12 @@ function UpdatePayment() {
 
     const token = localStorage.getItem("token")
 
+    const setAppartmentValue = (e) => {
+        if (data.appartement.appartementNumber)
+            e.target.value = data.appartement.appartementNumber
+        else e.target.value = ""
+    }
+
     // get the specific payment data
     const getPaymentData = (id) => {
         api.get(`/payments/${id}`, {
@@ -95,17 +101,17 @@ function UpdatePayment() {
                     </div>
                     <div className="form-group mb-6">
                         <label
-                            for="countries"
+                            for="apparte"
                             class="block mb-2 text-sm font-medium text-white"
                         >
                             Select Appartment Number
                         </label>
                         <select
-                            id="countries"
+                            id=""
                             class="outline-none text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                             name="appartement"
                             onChange={inputHandler}
-                            value={data.appartement.appartementNumber}
+                            value={setAppartmentValue}
                         >
                             <option selected disabled>
                                 Appartment Number
