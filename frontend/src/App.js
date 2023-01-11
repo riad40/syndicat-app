@@ -12,6 +12,7 @@ import {
     Dashboard,
     Home,
 } from "./pages/index"
+import PdfTemplate from "./components/PdfTemplate"
 
 function App() {
     return (
@@ -43,6 +44,8 @@ function App() {
                                 path="/payments/edit/:payment_id"
                                 element={<UpdatePayment />}
                             />
+
+                            <Route path="/pdf" element={<PdfTemplate />} />
                         </Route>
                     </Route>
                 </Routes>
