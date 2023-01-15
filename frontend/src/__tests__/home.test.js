@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { Login } from "../pages/index"
-import { inputs } from "../helpers/inputs"
+import Home from "../pages/Home"
 import { BrowserRouter as Router } from "react-router-dom"
 
 const validateInputs = (email = "", password = "") => {
@@ -13,7 +12,7 @@ describe("Login", () => {
     test("should login page be rendred", () => {
         render(
             <Router>
-                <Login inputs={inputs} />
+                <Home />
             </Router>
         )
         const emailInput = screen.getByTestId("emailInput")
