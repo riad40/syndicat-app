@@ -1,6 +1,6 @@
 import React from "react"
 
-function PdfTemplate() {
+function PdfTemplate({ data }) {
     return (
         <>
             <div class="mx-auto p-16" style={{ maxWidth: "800px" }}>
@@ -21,30 +21,34 @@ function PdfTemplate() {
 
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Appartment Owner</div>
-                    <div class="text-right font-medium">Jhon Doe</div>
+                    <div class="text-right font-medium">{data.owner}</div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Appartment Number</div>
-                    <div class="text-right font-medium">8</div>
+                    <div class="text-right font-medium">
+                        {data.appartmentNumber}
+                    </div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Floor Number</div>
-                    <div class="text-right font-medium">4</div>
+                    <div class="text-right font-medium">{data.floorNumber}</div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Monthly Rate Amount</div>
-                    <div class="text-right font-medium">500 MAD</div>
+                    <div class="text-right font-medium">{data.price} MAD</div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Months Paid</div>
-                    <div class="text-right font-medium">01 mars 2000</div>
+                    <div class="text-right font-medium">{data.monthsPaid}</div>
                 </div>
 
                 <div class="flex justify-between items-center mb-2 px-3">
                     <div class="text-2xl leading-none">
                         <span class="">Total</span>:
                     </div>
-                    <div class="text-2xl text-right font-medium">500 MAD</div>
+                    <div class="text-2xl text-right font-medium">
+                        {data.totalPaid} MAD
+                    </div>
                 </div>
 
                 <div class="mb-8 text-4xl text-center px-3">
