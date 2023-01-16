@@ -1,6 +1,8 @@
 const Payment = require("../models/Payment")
 const Apparetement = require("../models/Appartement")
 const { validationResult } = require("express-validator/check")
+const pdf = require("html-pdf-phantomjs-included")
+const invoiceTemplate = require("../documents/invoice-template")
 
 const createPayment = async (req, res, next) => {
     const { paymentId, paymentAmount, monthsPayed, appartement } = req.body
@@ -24,9 +26,33 @@ const createPayment = async (req, res, next) => {
         })
         await payment.save()
 
-        res.json(200, { message: "New Payment Created Succefully", payment })
+        await pdf
+            .create(
+                invoiceTemplate({
+                    paymentId: payment.paymentId,
+                    paymentAmount: payment.paymentAmount,
+                    paymentDate: payment.monthsPayed,
+                    totalPaid: payment.paymentAmount,
+                    appartementNumber: appartementId.appartementNumber,
+                    appartementOwner: appartementId.appartementOwner,
+                }),
+                {}
+            )
+            .toFile("documents/invoice.pdf", (err) => {
+                if (err) {
+                    next({ status: 400, error: true, message: err })
+                    console.log(err)
+                }
+            })
+
+        res.json(200, {
+            message: "New Payment Created Succefully",
+            payment,
+            appartementId,
+        })
     } catch (error) {
         next({ status: 400, error: true, message: error })
+        console.log(error)
     }
 }
 

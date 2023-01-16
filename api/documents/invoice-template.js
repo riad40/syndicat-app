@@ -1,19 +1,38 @@
-import React from "react"
-
-function PdfTemplate({ data }) {
-    return (
-        <>
-            <div class="mx-auto p-16" style={{ maxWidth: "800px" }}>
+module.exports = ({
+    paymentId,
+    paymentAmount,
+    paymentDate,
+    totalPaid,
+    appartementNumber,
+    appartementOwner,
+}) => {
+    const today = new Date()
+    return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Invoice</title>
+        </head>
+        <body>
+            <div class="mx-auto p-16" style="max-width: 800px">
                 <div class="flex items-center justify-between mb-8 px-3">
                     <div>
-                        <span class="text-2xl">Syndicat Ticket #</span>:
-                        0001-2019
+                        <span class="text-2xl">
+                            Syndicat Ticket #${paymentId}
+                        </span>
                         <br />
-                        <span>Date</span>: January 1st 2019
+                        <span>Date</span>: ${`${today.getDate()}. ${
+                            today.getMonth() + 1
+                        }. ${today.getFullYear()}.`}
                         <br />
                     </div>
                     <div class="text-right">
-                        <img src="https://www.stenvdb.be/assets/img/email-signature.png" />
+                        <img
+                            src="https://www.stenvdb.be/assets/img/email-signature.png"
+                        />
                     </div>
                 </div>
 
@@ -21,25 +40,25 @@ function PdfTemplate({ data }) {
 
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Appartment Owner</div>
-                    <div class="text-right font-medium">{data.owner}</div>
+                    <div class="text-right font-medium">
+                        ${appartementOwner}
+                    </div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Appartment Number</div>
                     <div class="text-right font-medium">
-                        {data.appartmentNumber}
+                        ${appartementNumber}
                     </div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
-                    <div>Floor Number</div>
-                    <div class="text-right font-medium">{data.floorNumber}</div>
-                </div>
-                <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
-                    <div>Monthly Rate Amount</div>
-                    <div class="text-right font-medium">{data.price} MAD</div>
+                    <div>Monthly Paid Amount</div>
+                    <div class="text-right font-medium">
+                        ${paymentAmount} MAD
+                    </div>
                 </div>
                 <div class="flex justify-between mb-4 bg-gray-200 px-3 py-2">
                     <div>Months Paid</div>
-                    <div class="text-right font-medium">{data.monthsPaid}</div>
+                    <div class="text-right font-medium">${paymentDate}</div>
                 </div>
 
                 <div class="flex justify-between items-center mb-2 px-3">
@@ -47,7 +66,7 @@ function PdfTemplate({ data }) {
                         <span class="">Total</span>:
                     </div>
                     <div class="text-2xl text-right font-medium">
-                        {data.totalPaid} MAD
+                        ${totalPaid} MAD
                     </div>
                 </div>
 
@@ -59,8 +78,7 @@ function PdfTemplate({ data }) {
                     contact@syndicat.ma ∖ www.syndicat-app.ma
                 </div>
             </div>
-        </>
-    )
+        </body>
+        </html>
+    `
 }
-
-export default PdfTemplate

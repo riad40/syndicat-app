@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { api } from "../../helpers/api"
 import { generateUniqId } from "../../helpers/id_generator"
+import { saveAs } from "file-saver"
 
 function CreatePayment() {
     const [data, setData] = useState({ paymentId: generateUniqId() })
@@ -14,8 +15,6 @@ function CreatePayment() {
             [e.target.name]: e.target.value,
         })
     }
-
-    console.log(data)
 
     const token = localStorage.getItem("token")
 
@@ -40,7 +39,15 @@ function CreatePayment() {
         })
             .then((response) => {
                 setSucc(response.data.message)
-                console.log(response)
+                api.get("/payments/fetch-invoice", {
+                    responseType: "blob",
+                }).then((res) => {
+                    const pdfBlob = new Blob([res.data], {
+                        type: "application/pdf",
+                    })
+
+                    saveAs(pdfBlob, "invoice.pdf")
+                })
             })
             .catch((err) => {
                 console.log(err)
