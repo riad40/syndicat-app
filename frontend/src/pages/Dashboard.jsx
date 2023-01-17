@@ -21,8 +21,8 @@ function Dashboard() {
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">1,257</p>
-                        <p>Visitors</p>
+                        <p class="text-2xl">1</p>
+                        <p>Users</p>
                     </div>
                 </div>
                 <div class="bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-gray-600 text-white font-medium group">
@@ -44,8 +44,8 @@ function Dashboard() {
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">557</p>
-                        <p>Orders</p>
+                        <p class="text-2xl">5</p>
+                        <p>Payments</p>
                     </div>
                 </div>
                 <div class="bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-gray-600 text-white font-medium group">
@@ -67,8 +67,8 @@ function Dashboard() {
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">$11,257</p>
-                        <p>Sales</p>
+                        <p class="text-2xl">5</p>
+                        <p>Floors</p>
                     </div>
                 </div>
                 <div class="bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-gray-600 text-white font-medium group">
@@ -90,8 +90,8 @@ function Dashboard() {
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">$75,257</p>
-                        <p>Balances</p>
+                        <p class="text-2xl">7</p>
+                        <p>Appartments</p>
                     </div>
                 </div>
             </div>
