@@ -1,5 +1,5 @@
 const request = require("supertest")
-const app = require("../app")
+const app = require("../server")
 
 describe("POST /api/auth/login", () => {
     let body = {
@@ -10,8 +10,8 @@ describe("POST /api/auth/login", () => {
     describe("given all registration credintials", () => {
         test("success", async () => {
             body = {
-                email: "test@gmail.com",
-                password: "kgiygluglulg",
+                email: "syndicat@gmail.com",
+                password: "syndic123",
             }
             const response = await request(app)
                 .post("/api/auth/login")
@@ -21,7 +21,7 @@ describe("POST /api/auth/login", () => {
 
         test("error", async () => {
             body = {
-                email: "rest2000h@gmail.com",
+                email: "syndicat@gmail.com",
                 password: "kgiygluglulg",
             }
             const response = await request(app)
