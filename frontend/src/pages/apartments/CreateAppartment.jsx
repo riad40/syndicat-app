@@ -37,7 +37,7 @@ function CreateAppartment() {
                 // console.log(response)
             })
             .catch((err) => {
-                setErr(err.response?.data)
+                setErr(err.response?.data?.message)
                 console.log(err)
             })
     }
@@ -49,6 +49,9 @@ function CreateAppartment() {
                     Create New Appartment
                 </h1>
                 <p className="text-center text-green-300">{succ}</p>
+                <p className="text-center text-red-300">
+                    {err && err.map((er) => er.msg + " " + er.param + " ")}
+                </p>
                 <form onSubmit={createAppartment} className="w-full">
                     <div className="form-group mb-6">
                         <label htmlFor="">Appartment Number</label>

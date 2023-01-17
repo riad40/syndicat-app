@@ -69,7 +69,10 @@ function Payment() {
                                             {payment.paymentId}
                                         </td>
                                         <td className="px-4 py-3 text-sm">
-                                            {payment.monthsPayed[0]}
+                                            {payment.monthsPayed[0].slice(
+                                                0,
+                                                10
+                                            )}
                                         </td>
                                         <td className="px-4 py-3 text-sm">
                                             <Link

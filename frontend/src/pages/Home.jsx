@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthContext"
 function Home() {
     const [user, setUser] = useState({})
 
-    const [err, setErr] = useState("")
+    const [err, setErr] = useState()
 
     const [noErr, setNoErr] = useState(false)
 
@@ -42,7 +42,10 @@ function Home() {
                         <h2 className="text-xl font-bold text-white text-center">
                             Sign In
                         </h2>
-                        {/* <p className='text-center text-red-300'>{ err }</p> */}
+                        <p className="text-center text-red-300">
+                            {err &&
+                                err.map((er) => er.msg + " " + er.param + " ")}
+                        </p>
                     </div>
                     <form onSubmit={login}>
                         <div>

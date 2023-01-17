@@ -77,6 +77,9 @@ function UpdatePayment() {
                     Update Payment
                 </h1>
                 <p className="text-center text-green-300">{succ}</p>
+                <p className="text-center text-red-300">
+                    {err && err.map((er) => er.msg + " " + er.param + " ")}
+                </p>
                 <form onSubmit={updatePayment} className="w-full">
                     <div className="form-group mb-6">
                         <label htmlFor="">Payment Amount</label>

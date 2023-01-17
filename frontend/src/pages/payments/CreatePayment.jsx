@@ -26,7 +26,7 @@ function CreatePayment() {
                 setAppartments(response.data.data)
             })
             .catch((err) => {
-                setErr(err.response?.data)
+                setErr(err.response?.data?.message)
                 console.log(err)
             })
     }, [])
@@ -60,6 +60,9 @@ function CreatePayment() {
                     Create New Payment
                 </h1>
                 <p className="text-center text-green-300">{succ}</p>
+                <p className="text-center text-red-300">
+                    {err && err.map((er) => er.msg + " " + er.param + " ")}
+                </p>
                 <form onSubmit={createPayment} className="w-full">
                     <div className="form-group mb-6">
                         <label htmlFor="">Payment Amount</label>

@@ -8,6 +8,7 @@ function UpdateAppartment() {
     const [data, setData] = useState({})
     const [floors, setFloors] = useState([])
     const [succ, setSucc] = useState()
+    const [err, setErr] = useState()
 
     const token = localStorage.getItem("token")
 
@@ -66,6 +67,7 @@ function UpdateAppartment() {
             })
             .catch((error) => {
                 console.log(error)
+                setErr(err.response?.data?.message)
             })
     }
 
@@ -76,6 +78,9 @@ function UpdateAppartment() {
                     Update Appartment
                 </h1>
                 <p className="text-center text-green-300">{succ}</p>
+                <p className="text-center text-red-300">
+                    {err && err.map((er) => er.msg + " " + er.param + " ")}
+                </p>
                 <form onSubmit={updateAppartment} className="w-full">
                     <div className="form-group mb-6">
                         <label htmlFor="">Appartment Number</label>
@@ -109,14 +114,14 @@ function UpdateAppartment() {
                         <select
                             id="countries"
                             class="outline-none text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                            value={data.floorNumber.floorNumber}
+                            value={data.floorNumber?.floorNumber}
                             name="floorNumber"
                             onChange={inputHandler}
                         >
                             <option selected disabled>
                                 Floor Number
                             </option>
-                            {floors.map((floor) => (
+                            {floors?.map((floor) => (
                                 <option value={floor.floorNumber}>
                                     {floor.floorNumber}
                                 </option>
