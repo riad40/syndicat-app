@@ -26,6 +26,13 @@ const createPayment = async (req, res, next) => {
         })
         await payment.save()
 
+        // update the appartement last month paid
+        await Apparetement.updateOne(
+            { _id: appartementId._id },
+            { lastMonthPaid: monthsPayed }
+        )
+
+        // generate invoice
         await pdf
             .create(
                 invoiceTemplate({

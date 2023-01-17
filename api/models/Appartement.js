@@ -11,6 +11,10 @@ const appartementSchema = new mongoose.Schema({
         required: true,
         max: 255,
     },
+    lastMonthPaid: {
+        type: Date,
+        default: Date.now,
+    },
     floorNumber: {
         type: mongoose.Types.ObjectId,
         ref: "Floor",

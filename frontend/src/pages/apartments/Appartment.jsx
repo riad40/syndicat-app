@@ -90,7 +90,21 @@ function Appartment() {
                                             {appartment.floorNumber.floorNumber}
                                         </td>
                                         <td className="px-4 py-3 text-sm text-center">
-                                            15-01-2021
+                                            {new Date().getFullYear() * 12 +
+                                                new Date().getMonth() -
+                                                (new Date(
+                                                    appartment.lastMonthPaid.slice(
+                                                        0,
+                                                        10
+                                                    )
+                                                ).getFullYear() *
+                                                    12 +
+                                                    new Date(
+                                                        appartment.lastMonthPaid.slice(
+                                                            0,
+                                                            10
+                                                        )
+                                                    ).getMonth())}
                                         </td>
                                         <td className="px-4 py-3 text-sm text-center">
                                             <Link

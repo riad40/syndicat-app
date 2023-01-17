@@ -54,10 +54,9 @@ function Payment() {
                                             <div className="flex items-center text-sm">
                                                 <div>
                                                     <p className="font-semibold">
-                                                        {
-                                                            payment.appartement
-                                                                .appartementOwner
-                                                        }
+                                                        {payment?.appartement
+                                                            ?.appartementOwner ||
+                                                            "No Owner"}
                                                     </p>
                                                 </div>
                                             </div>
