@@ -1,7 +1,8 @@
 import "./home.css"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { api } from "../helpers/api"
 import { Navigate } from "react-router-dom"
+import AuthContext from "../context/AuthContext"
 
 function Home() {
     const [user, setUser] = useState({})
@@ -9,6 +10,8 @@ function Home() {
     const [err, setErr] = useState("")
 
     const [noErr, setNoErr] = useState(false)
+
+    const { setUsr } = useContext(AuthContext)
 
     const inputHandler = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -21,7 +24,8 @@ function Home() {
             .then((response) => {
                 localStorage.setItem("token", response.data.token)
                 setNoErr(true)
-                localStorage.setItem("usr", JSON.stringify(response.data.user))
+                localStorage.setItem("usr", response.data.user)
+                setUsr(response.data.user)
             })
             .catch((err) => {
                 setErr(err.response?.data?.message)

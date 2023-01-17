@@ -61,7 +61,8 @@ const isloggedin = async (req, res, next) => {
 // logout
 const logout = (req, res, next) => {
     try {
-        res.removeHeader("Authorization").send("log out succefully")
+        res.removeHeader("Authorization")
+        res.send("log out succefully")
     } catch (err) {
         next({ error: true, status: 400, message: err.message })
     }
