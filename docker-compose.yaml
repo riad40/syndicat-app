@@ -12,17 +12,17 @@ services:
         volumes:
             - ./api:/api
 
-    # frontend:
-    #   build: ./frontend
-    #   container_name: frontend_container
-    #   ports:
-    #     - 3000:3000
-    #   networks:
-    #     - syndicat-app-net
-    #   depends_on:
-    #     - api
-    #   volumes:
-    #     - ./frontend:/frontend
+    frontend:
+        build: ./frontend
+        container_name: frontend_container
+        ports:
+            - 3000:3000
+        networks:
+            - syndicat-app-net
+        depends_on:
+            - api
+        volumes:
+            - ./frontend:/frontend
 
     mongodb:
         image: mongo
