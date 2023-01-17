@@ -33,25 +33,26 @@ const createPayment = async (req, res, next) => {
         )
 
         // generate invoice
-        await pdf
-            .create(
-                invoiceTemplate({
-                    paymentId: payment.paymentId,
-                    paymentAmount: payment.paymentAmount,
-                    paymentDate: payment.monthsPayed,
-                    totalPaid: payment.paymentAmount,
-                    appartementNumber: appartementId.appartementNumber,
-                    appartementOwner: appartementId.appartementOwner,
-                }),
-                {}
-            )
-            .toFile("documents/invoice.pdf", (err) => {
-                if (err) {
-                    next({ status: 400, error: true, message: err })
-                    console.log(err)
-                }
-            })
-
+        if (payment && appartementId) {
+            await pdf
+                .create(
+                    invoiceTemplate({
+                        paymentId: payment.paymentId,
+                        paymentAmount: payment.paymentAmount,
+                        paymentDate: payment.monthsPayed,
+                        totalPaid: payment.paymentAmount,
+                        appartementNumber: appartementId.appartementNumber,
+                        appartementOwner: appartementId.appartementOwner,
+                    }),
+                    {}
+                )
+                .toFile("documents/invoice.pdf", (err) => {
+                    if (err) {
+                        next({ status: 400, error: true, message: err })
+                        console.log(err)
+                    }
+                })
+        }
         res.json(200, {
             message: "New Payment Created Succefully",
             payment,

@@ -39,15 +39,18 @@ function CreatePayment() {
         })
             .then((response) => {
                 setSucc(response.data.message)
-                api.get("/payments/fetch-invoice", {
-                    responseType: "blob",
-                }).then((res) => {
-                    const pdfBlob = new Blob([res.data], {
-                        type: "application/pdf",
-                    })
 
-                    saveAs(pdfBlob, "invoice.pdf")
-                })
+                setTimeout(() => {
+                    api.get("/payments/fetch-invoice", {
+                        responseType: "blob",
+                    }).then((res) => {
+                        const pdfBlob = new Blob([res.data], {
+                            type: "application/pdf",
+                        })
+
+                        saveAs(pdfBlob, "invoice.pdf")
+                    })
+                }, 3000)
             })
             .catch((err) => {
                 console.log(err)
